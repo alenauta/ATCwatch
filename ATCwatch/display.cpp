@@ -137,7 +137,7 @@ void initDisplay() {
   delay(100);
   startWrite_display();
   spiCommand(54);
-  temp[0] = 0x00;//0xC0 when rotated screen
+  temp[0] = 0x40;// rotation for P8b
   write_fast_spi(temp, 1);
   spiCommand(58);
   temp[0] = 5;
@@ -206,7 +206,7 @@ void initDisplay() {
   temp[12] = 32;
   temp[13] = 35;
   write_fast_spi(temp, 14);
-  spiCommand(33);
+  //spiCommand(33); // colors inversion (33=on, 32=off)
   spiCommand(17);
   delay(120);
   spiCommand(41);
