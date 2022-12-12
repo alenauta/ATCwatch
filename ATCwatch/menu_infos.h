@@ -17,7 +17,7 @@
 #include "push.h"
 #include "heartrate.h"
 
-#define versionString "2.0.1"
+#define versionString "2.0.2"
 
 class InfosScreen : public Screen
 {
@@ -35,10 +35,11 @@ class InfosScreen : public Screen
                         "Infos:\n"
                         "Firmware By:\n"
                         "   ATCnetz.de\n"
-                        "    (Aaron Christophel)\n"
-                        "  Compiled:\n"
-                        "  "__DATE__"\n"
-                        "  "__TIME__
+                        "Mod by:\n"
+                        "   Nauta\n"
+                        "Compiled:\n"
+                        "   "__DATE__"\n"
+                        "   "__TIME__
                        );
                        
       lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
