@@ -28,7 +28,7 @@ class BootScreen : public Screen
       set_gray_screen_style(&lv_font_roboto_28);
 
       lv_obj_t *label = lv_label_create(lv_scr_act(), NULL);
-      lv_label_set_text(label, "Booting\n""ATCwatch");
+      lv_label_set_text(label, "Booting\n""nautaWatch");
       lv_label_set_align(label, LV_LABEL_ALIGN_CENTER);
       lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, -60);
 
