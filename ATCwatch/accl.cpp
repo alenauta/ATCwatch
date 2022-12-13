@@ -60,7 +60,8 @@ void reset_step_counter() {
 
 uint32_t read_step_data() {
   uint32_t data;
-  user_i2c_read(0x18, 0x1E, (uint8_t *)&data, 4);
+  // user_i2c_read(0x18, 0x1E, (uint8_t *)&data, 4);
+  data = 77;
   return data;
 }
 
@@ -98,21 +99,26 @@ bool get_is_looked_at() {
 accl_data_struct get_accl_data() {
   update_accl_data();
   accl_data.steps = read_step_data();
-  accl_data.activity = accl_read_reg(0x27);
-  accl_data.temp = accl_read_reg(0x22) + 23;
+  // accl_data.activity = accl_read_reg(0x27); // no activity on sc7a20 ?
+  // accl_data.temp = accl_read_reg(0x22) + 23;
+  user_i2c_read(0x18, 0x0C, (uint8_t *)&accl_data.temp, 2);
+  // accl_data.tempL = accl_read_reg(0x0C);
+  // accl_data.tempH = accl_read_reg(0x0D);
   return accl_data;
 }
 
 void update_accl_data() {
-  user_i2c_read(0x18, 0x12, (uint8_t *)&accl_data.x, 6);
+  user_i2c_read(0x18, 0x28, (uint8_t *)&accl_data.x, 2); // NAUTA
+  user_i2c_read(0x18, 0x2A, (uint8_t *)&accl_data.y, 2); // NAUTA
+  user_i2c_read(0x18, 0x2C, (uint8_t *)&accl_data.z, 2); // NAUTA
 #ifdef SWITCH_X_Y // pinetime has 90° rotated Accl
   short tempX = accl_data.x;
   accl_data.x = accl_data.y;
   accl_data.y = tempX;
 #endif
-  accl_data.x = (accl_data.x / 0x10);
-  accl_data.y = (accl_data.y / 0x10);
-  accl_data.z = (accl_data.z / 0x10);
+  // accl_data.x = (accl_data.x / 0x10);
+  // accl_data.y = (accl_data.y / 0x10);
+  // accl_data.z = (accl_data.z / 0x10);
 }
 
 void accl_write_reg(uint8_t reg, uint8_t data) {

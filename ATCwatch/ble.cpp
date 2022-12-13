@@ -24,10 +24,10 @@ BLECharacteristic   RXchar        = BLECharacteristic("0001", BLEWriteWithoutRes
 bool vars_ble_connected = false;
 
 void init_ble() {
-  blePeripheral.setLocalName("nautaWatch");
+  blePeripheral.setLocalName("ATCnauta");
   blePeripheral.setConnectionInterval(400,401);
   blePeripheral.setAdvertisingInterval(500);
-  blePeripheral.setDeviceName("nautaWatch");
+  blePeripheral.setDeviceName("ATCnauta");
   blePeripheral.setAdvertisedServiceUuid(main_service.uuid());
   blePeripheral.addAttribute(main_service);
   blePeripheral.addAttribute(TXchar);
