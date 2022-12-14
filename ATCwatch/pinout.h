@@ -33,9 +33,9 @@
 #define TP_INT       28
 
 //Accl Sensor
-#define BMA421_SDA       6
-#define BMA421_SCL       7
-#define BMA421_INT       8
+#define SC7A20_SDA       6
+#define SC7A20_SCL       7
+#define SC7A20_INT       8
 //#define SWITCH_X_Y
 
 //HeartRate Sensor

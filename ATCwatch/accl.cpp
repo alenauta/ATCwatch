@@ -17,7 +17,7 @@
 struct accl_data_struct accl_data;
 
 void init_accl() {
-  pinMode(BMA421_INT, INPUT);
+  pinMode(SC7A20_INT, INPUT);
   reset_accl();
   delay(10);
   accl_write_reg(0x7C, 0x00);//Sleep disable

@@ -14,7 +14,7 @@
 #include "time.h"
 #include "battery.h"
 #include "sleep.h"
-#include "accl.h"
+// #include "accl.h"
 #include "push.h"
 #include "heartrate.h"
 #include "backlight.h"

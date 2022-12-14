@@ -14,7 +14,7 @@
 #include "display.h"
 #include "menu_Boot.h"
 #include "menu_Home.h"
-#include "menu_Heart.h"
+// #include "menu_Heart.h"
 // #include "menu_Debug.h"
 // #include "menu_Reboot.h"
 #include "menu_Update.h"
@@ -27,7 +27,7 @@
 // #include "menu_Settings_Brightness.h"
 // #include "menu_Animation.h"
 // #include "menu_infos.h"
-// #include "menu_Accl.h"
+#include "menu_Accl.h"
 #include "menu_App.h"
 // #include "menu_Demo.h"
 #include "menu_Charging.h"
@@ -49,7 +49,7 @@ Screen_def *oldScreen = &homeScreen;
 Screen_def *lastScreen = &homeScreen;
 
 // app_struct notifyApp = {"Notify", &IsymbolMsg, &notifyScreen};
-app_struct heartApp = {"Heartrate", &IsymbolHeart, &heartScreen};
+// app_struct heartApp = {"Heartrate", &IsymbolHeart, &heartScreen};
 app_struct batteryApp = {"Battery", &IsymbolBatteryBig, &batteryScreen};
 // app_struct debugApp = {"Debug", &IsymbolDebug, &debugScreen};
 
@@ -60,7 +60,7 @@ app_struct offApp = {"Shutdown", &IsymbolShutdown, &offScreen};
 
 // app_struct animationApp = {"Animation", &IsymbolAnimation, &animationScreen};
 // app_struct infosApp = {"Infos", &IsymbolInfos, &infosScreen};
-// app_struct acclApp = {"Accl", &IsymbolAccl , &acclScreen};
+app_struct acclApp = {"Accl", &IsymbolAccl , &acclScreen};
 // app_struct demoApp = {"Demo", &IsymbolChart , &demoScreen};
 
 // app_struct flashApp = {"Flash_test", &IsymbolChart , &flashScreen};
@@ -74,11 +74,11 @@ int maxApps = 4;
 // AppScreen apps3Screen(3, maxApps, &infosApp, &acclApp, &demoApp, &batteryApp);
 // AppScreen apps4Screen(4, maxApps, &flashApp, &touchApp, &httpApp, &logApp);
 
-AppScreen apps1Screen(1, maxApps, &updateApp, &heartApp, &batteryApp, &offApp);
+AppScreen apps1Screen(1, maxApps, &updateApp, &acclApp, &batteryApp, &offApp);
 
 
 // Screen_def *menus[5] = {&homeScreen, &apps1Screen, &apps2Screen, &apps3Screen, &apps4Screen};
-Screen_def *menus[5] = {&homeScreen, &apps1Screen};
+Screen_def *menus[2] = {&homeScreen, &apps1Screen};
 
 void init_menu() {
 

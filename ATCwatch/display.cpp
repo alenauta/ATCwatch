@@ -11,7 +11,7 @@
 #include "images.h"
 #include "battery.h"
 #include "touch.h"
-#include "accl.h"
+// #include "accl.h"
 #include "menu.h"
 #include "ble.h"
 #include "heartrate.h"

@@ -14,7 +14,7 @@
 #include "ble.h"
 #include "time.h"
 #include "battery.h"
-#include "accl.h"
+// #include "accl.h"
 #include "push.h"
 #include "heartrate.h"
 #include "fonts.h"
@@ -28,7 +28,7 @@ class HomeScreen : public Screen
     virtual void pre()
     {
       time_data = get_time();
-      accl_data = get_accl_data();
+      // accl_data = get_accl_data();
 
       lv_style_copy( &st, &lv_style_plain );
       st.text.color = lv_color_hsv_to_rgb(10, 5, 95);
@@ -79,7 +79,7 @@ class HomeScreen : public Screen
 
       label_steps = lv_label_create(lv_scr_act(), NULL);
       lv_obj_set_width(label_steps, 240);
-      lv_label_set_text_fmt(label_steps, "%i", accl_data.steps);
+      // lv_label_set_text_fmt(label_steps, "%i", accl_data.steps);
       lv_obj_align(label_steps, img_steps, LV_ALIGN_OUT_RIGHT_MID, 2, 0);
 
 
@@ -103,7 +103,7 @@ class HomeScreen : public Screen
     virtual void main()
     {
       time_data = get_time();
-      accl_data = get_accl_data();
+      // accl_data = get_accl_data();
 
       lv_label_set_text_fmt(label_time,  "%02i:%02i:%02i", time_data.hr, time_data.min, time_data.sec);
       lv_label_set_text_fmt(label_date, "%02i.%02i.%04i", time_data.day, time_data.month, time_data.year);
@@ -111,7 +111,7 @@ class HomeScreen : public Screen
       lv_label_set_text_fmt(label_battery, "%i%%", get_battery_percent());
 
       lv_label_set_text_fmt(label_heart, "%i", get_last_heartrate());
-      lv_label_set_text_fmt(label_steps, "%i", accl_data.steps);
+      // lv_label_set_text_fmt(label_steps, "%i", accl_data.steps);
 
       if (get_vars_ble_connected())
         style_ble.text.color = LV_COLOR_MAKE(0x27, 0xA6, 0xFF);
@@ -152,7 +152,7 @@ class HomeScreen : public Screen
 
   private:
     time_data_struct time_data;
-    accl_data_struct accl_data;
+    // accl_data_struct accl_data;
     lv_style_t st;
     lv_obj_t *label, *label_heart, *label_steps, *label_msg;
     lv_obj_t *label_time, *label_date;

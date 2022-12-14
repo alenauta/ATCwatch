@@ -7,7 +7,7 @@
 #include "bootloader.h"
 #include "pinout.h"
 #include "interrupt.h"
-#include "accl.h"
+// #include "accl.h"
 #include "touch.h"
 #include "sleep.h"
 #include <nrf_nvic.h>//interrupt controller stuff
@@ -46,7 +46,7 @@ bool get_sd_enabled() {
 void system_off()
 {
   sleep_touch(true);
-  reset_accl();
+  // reset_accl();
   disable_interrupt();
   disable_hardware();
   if (PUSH_BUTTON_OUT != -1) {

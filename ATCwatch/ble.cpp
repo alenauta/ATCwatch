@@ -14,7 +14,7 @@
 #include "backlight.h"
 #include "bootloader.h"
 #include "push.h"
-#include "accl.h"
+// #include "accl.h"
 
 BLEPeripheral                   blePeripheral           = BLEPeripheral();
 BLEService                      main_service     = BLEService("190A");
@@ -105,9 +105,9 @@ void filterCmd(String Command) {
     ble_write("AT+RUN:" + Command.substring(7));
   } else if (Command.substring(0, 8) == "AT+USER=") {
     ble_write("AT+USER:" + Command.substring(8));
-  } else if (Command == "AT+PACE") {
-    accl_data_struct accl_data = get_accl_data();
-    ble_write("AT+PACE:" + String(accl_data.steps));
+  // } else if (Command == "AT+PACE") {
+  //   accl_data_struct accl_data = get_accl_data();
+  //   ble_write("AT+PACE:" + String(accl_data.steps));
   } else if (Command == "AT+BATT") {
     ble_write("AT+BATT:" + String(get_battery_percent()));
   } else if (Command.substring(0, 8) == "AT+PUSH=") {
