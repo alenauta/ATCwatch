@@ -43,7 +43,7 @@ void setup() {
   init_backlight();
   init_display();
   display_booting();
-  set_backlight(3);
+  set_backlight(1);
   init_battery();
   init_hrs3300();
   init_time();
@@ -84,7 +84,7 @@ void loop() {
       }
     } else stepsWhereReseted = false;
 
-    check_timed_heartrate(time_data.min);//Meassure HR every 15minutes
+    check_timed_heartrate(time_data.min);//Measure HR every 15minutes
   }
   gets_interrupt_flag();//check interrupt flags and do something with it
 }

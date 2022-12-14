@@ -15,65 +15,70 @@
 #include "menu_Boot.h"
 #include "menu_Home.h"
 #include "menu_Heart.h"
-#include "menu_Debug.h"
-#include "menu_Reboot.h"
+// #include "menu_Debug.h"
+// #include "menu_Reboot.h"
 #include "menu_Update.h"
 #include "menu_Off.h"
 #include "menu_Notify.h"
 #include "menu_Battery.h"
-#include "menu_Settings_Time.h"
-#include "menu_Settings_Date.h"
-#include "menu_Settings_Color.h"
-#include "menu_Settings_Brightness.h"
-#include "menu_Animation.h"
-#include "menu_infos.h"
-#include "menu_Accl.h"
+// #include "menu_Settings_Time.h"
+// #include "menu_Settings_Date.h"
+// #include "menu_Settings_Color.h"
+// #include "menu_Settings_Brightness.h"
+// #include "menu_Animation.h"
+// #include "menu_infos.h"
+// #include "menu_Accl.h"
 #include "menu_App.h"
-#include "menu_Demo.h"
+// #include "menu_Demo.h"
 #include "menu_Charging.h"
-#include "menu_Flash.h"
-#include "menu_Touch.h"
-#include "menu_Http.h"
-#include "menu_Log.h"
-#include "menu_Settings.h"
+// #include "menu_Flash.h"
+// #include "menu_Touch.h"
+// #include "menu_Http.h"
+// #include "menu_Log.h"
+// #include "menu_Settings.h"
 #include <lvgl.h>
 
 long last_main_run;
 int vars_menu = -1;
-int vars_max_menu = 4;
+// int vars_max_menu = 4;
+int vars_max_menu = 1;
 bool swipe_enabled_bool = false;
 
 Screen_def *currentScreen = &homeScreen;
 Screen_def *oldScreen = &homeScreen;
 Screen_def *lastScreen = &homeScreen;
 
-app_struct notifyApp = {"Notify", &IsymbolMsg, &notifyScreen};
+// app_struct notifyApp = {"Notify", &IsymbolMsg, &notifyScreen};
 app_struct heartApp = {"Heartrate", &IsymbolHeart, &heartScreen};
 app_struct batteryApp = {"Battery", &IsymbolBatteryBig, &batteryScreen};
-app_struct debugApp = {"Debug", &IsymbolDebug, &debugScreen};
+// app_struct debugApp = {"Debug", &IsymbolDebug, &debugScreen};
 
-app_struct rebootApp = {"Reboot", &IsymbolReboot, &rebootScreen};
+// app_struct rebootApp = {"Reboot", &IsymbolReboot, &rebootScreen};
 app_struct updateApp = {"Bootloader", &IsymbolBootloader, &updateScreen};
 app_struct offApp = {"Shutdown", &IsymbolShutdown, &offScreen};
-app_struct settingsApp = {"Settings", &IsymbolSettings, &settingsScreen};
+// app_struct settingsApp = {"Settings", &IsymbolSettings, &settingsScreen};
 
-app_struct animationApp = {"Animation", &IsymbolAnimation, &animationScreen};
-app_struct infosApp = {"Infos", &IsymbolInfos, &infosScreen};
-app_struct acclApp = {"Accl", &IsymbolAccl , &acclScreen};
-app_struct demoApp = {"Demo", &IsymbolChart , &demoScreen};
+// app_struct animationApp = {"Animation", &IsymbolAnimation, &animationScreen};
+// app_struct infosApp = {"Infos", &IsymbolInfos, &infosScreen};
+// app_struct acclApp = {"Accl", &IsymbolAccl , &acclScreen};
+// app_struct demoApp = {"Demo", &IsymbolChart , &demoScreen};
 
-app_struct flashApp = {"Flash_test", &IsymbolChart , &flashScreen};
-app_struct touchApp = {"Touch", &IsymbolMouse , &touchScreen};
-app_struct httpApp = {"HTTP", &IsymbolMouse , &httpScreen};
-app_struct logApp = {"Logging", &IsymbolAnimation , &logScreen};
+// app_struct flashApp = {"Flash_test", &IsymbolChart , &flashScreen};
+// app_struct touchApp = {"Touch", &IsymbolMouse , &touchScreen};
+// app_struct httpApp = {"HTTP", &IsymbolMouse , &httpScreen};
+// app_struct logApp = {"Logging", &IsymbolAnimation , &logScreen};
 
 int maxApps = 4;
-AppScreen apps1Screen(1, maxApps, &notifyApp, &heartApp, &debugApp, &animationApp);
-AppScreen apps2Screen(2, maxApps, &rebootApp, &updateApp, &offApp, &settingsApp);
-AppScreen apps3Screen(3, maxApps, &infosApp, &acclApp, &demoApp, &batteryApp);
-AppScreen apps4Screen(4, maxApps, &flashApp, &touchApp, &httpApp, &logApp);
+// AppScreen apps1Screen(1, maxApps, &notifyApp, &heartApp, &debugApp, &animationApp);
+// AppScreen apps2Screen(2, maxApps, &rebootApp, &updateApp, &offApp, &settingsApp);
+// AppScreen apps3Screen(3, maxApps, &infosApp, &acclApp, &demoApp, &batteryApp);
+// AppScreen apps4Screen(4, maxApps, &flashApp, &touchApp, &httpApp, &logApp);
 
-Screen_def *menus[5] = {&homeScreen, &apps1Screen, &apps2Screen, &apps3Screen, &apps4Screen};
+AppScreen apps1Screen(1, maxApps, &updateApp, &heartApp, &batteryApp, &offApp);
+
+
+// Screen_def *menus[5] = {&homeScreen, &apps1Screen, &apps2Screen, &apps3Screen, &apps4Screen};
+Screen_def *menus[5] = {&homeScreen, &apps1Screen};
 
 void init_menu() {
 
