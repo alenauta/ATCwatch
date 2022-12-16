@@ -15,6 +15,7 @@ struct time_data_struct {
   int hr;
   int min;
   int sec;
+  int weekday;
 };
 
 void init_time();

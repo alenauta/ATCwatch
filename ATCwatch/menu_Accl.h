@@ -39,20 +39,25 @@ public:
     lv_label_set_text(label_z, "Z:");
     lv_obj_align(label_z, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 65);
     label_temp = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_text(label_temp, "Temp:");
     lv_obj_align(label_temp, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 85);
-    label_steps = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_text(label_steps, "Steps:");
-    lv_obj_align(label_steps, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 105);
-    label_activity = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_text(label_activity, "Activity:");
-    lv_obj_align(label_activity, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 125);
+
+    // label_steps = lv_label_create(lv_scr_act(), NULL);
+    // lv_label_set_text(label_steps, "Steps:");
+    // lv_obj_align(label_steps, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 105);
+    // label_activity = lv_label_create(lv_scr_act(), NULL);
+    // lv_label_set_text(label_activity, "Activity:");
+    // lv_obj_align(label_activity, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 125);
 
     if (accel.begin() == false)
     {
       lv_label_set_text_fmt(label, "begin FALSE");
       fail = true;
     }
+
+    accel.setMode(LIS2DH12_LP_8bit);
+    accel.setDataRate(LIS2DH12_ODR_1Hz);
+    accel.setScale(LIS2DH12_2g);
+    // accel.disableTemperature();
   }
 
   virtual void main()
@@ -67,32 +72,45 @@ public:
     // lv_label_set_text_fmt(label_activity, "Activity: %i", accl_data.activity);
 
     if (accel.available() and !fail)
+    // if (accel.available())
     {
       lv_label_set_text_fmt(label, "Accl available");
-      float accelX = accel.getX();
-      float accelY = accel.getY();
-      float accelZ = accel.getZ();
-      float tempC = accel.getTemperature();
+      int accelX = (int)(accel.getX() / 10);
+      int accelY = (int)(accel.getY() / 10);
+      int accelZ = (int)(accel.getZ() / 10);
+      look = (get_is_looked_at(accelX, accelY, accelZ)) ? "YES\0" : "NO\0";
 
-      lv_label_set_text_fmt(label_x, "X: %g", accelX);
-      lv_label_set_text_fmt(label_y, "Y: %g", accelY);
-      lv_label_set_text_fmt(label_z, "Z: %g", accelZ);
-      lv_label_set_text_fmt(label_temp, "Temp: %g", tempC);
+      lv_label_set_text_fmt(label_x, "X: %i", accelX);
+      lv_label_set_text_fmt(label_y, "Y: %i", accelY);
+      lv_label_set_text_fmt(label_z, "Z: %i", accelZ);
+      lv_label_set_text(label_temp, look.c_str());
+
+      // lv_label_set_text_fmt(label_temp, "Temp: %g", tempC);
     }
   }
 
   virtual void right()
   {
+    accel.setDataRate(LIS2DH12_POWER_DOWN); // Stop measurements
     set_last_menu();
   }
 
   virtual void down()
   {
-    // reset_step_counter();
+    // lv_label_set_text_fmt(label_temp, "Is looked at: %s", look);
+  }
+
+  bool get_is_looked_at(int x, int y, int z)
+  {
+    // if ((y + 30) <= 60 && (x + 30) <= 60 && z < 10)
+    if ((-75 <= x && x <= 60) && (-60 <= y && y <= 60) && z < 10)
+      return true;
+    return false;
   }
 
 private:
   SPARKFUN_LIS2DH12 accel;
+  String look;
   bool fail = false;
   lv_obj_t *label, *label_x, *label_y, *label_z;
   lv_obj_t *label_temp, *label_steps, *label_activity;

@@ -27,6 +27,7 @@
 #include "flash.h"
 
 bool stepsWhereReseted = false;
+SPARKFUN_LIS2DH12 accel;
 
 void setup()
 {
@@ -46,7 +47,7 @@ void setup()
   init_backlight();
   init_display();
   display_booting();
-  set_backlight(1);
+  // set_backlight(1);
   init_battery();
   init_hrs3300();
   init_time();
@@ -56,10 +57,11 @@ void setup()
   init_push();
   init_flash();
   // init_accl();
+  accel.begin();
   init_ble();       // must be before interrupts!!!
   init_interrupt(); // must be after ble!!!
   delay(100);
-  set_backlight(3);
+  set_backlight(1);
   display_home();
 }
 
@@ -84,7 +86,7 @@ void loop()
   //      sleep_up(WAKEUP_ACCL);//check if the hand was lifted and turn on the display if so
   //   }
   // }
-  time_data_struct time_data = get_time();
+  // time_data_struct time_data = get_time();
   // if (time_data.hr == 0) {// check for new day
   //   if (!stepsWhereReseted) {//reset steps on a new day
   //     stepsWhereReseted = true;

@@ -13,7 +13,7 @@
 #include "ble.h"
 #include "time.h"
 #include "battery.h"
-#include "accl.h"
+// #include "accl.h"
 #include "push.h"
 #include "heartrate.h"
 
@@ -84,7 +84,7 @@ class HttpScreen : public Screen
       if (object == btn1 && event == LV_EVENT_SHORT_CLICKED) {
         ble_write("AT+HTTP:CMD" + String(millis()));
       } else if (object == btn2 && event == LV_EVENT_SHORT_CLICKED) {
-        ble_write("AT+HTTP:TEST");
+        ble_write("AT+HTTP:" + String("https://api.openweathermap.org/data/2.5/weather?q=Dublin&units=metric&appid=85a4e3c55b73909f42c6a23ec35b7147"));
       } else if (object == btn3 && event == LV_EVENT_SHORT_CLICKED) {
         ble_write("AT+HTTP:OPEN");
       } else if (object == btn4 && event == LV_EVENT_SHORT_CLICKED) {

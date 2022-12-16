@@ -39,17 +39,17 @@ class AppScreen : public Screen
 
     virtual void pre()
     {
-      slider = lv_slider_create(lv_scr_act(), NULL);
-      lv_obj_set_size(slider, 23, 100);
-      lv_slider_set_range(slider, 1, _maxApps);
-      lv_slider_set_value(slider, _maxApps - _menuPosition + 1, false);
-      lv_obj_align(slider, NULL, LV_ALIGN_IN_RIGHT_MID, -4, 0);
-      lv_obj_set_click(slider, false);
-      lv_obj_set_click(lv_page_get_scrl(slider), false);
+      // slider = lv_slider_create(lv_scr_act(), NULL);
+      // lv_obj_set_size(slider, 23, 100);
+      // lv_slider_set_range(slider, 1, _maxApps);
+      // lv_slider_set_value(slider, _maxApps - _menuPosition + 1, false);
+      // lv_obj_align(slider, NULL, LV_ALIGN_IN_RIGHT_MID, -4, 0);
+      // lv_obj_set_click(slider, false);
+      // lv_obj_set_click(lv_page_get_scrl(slider), false);
 
-      label = lv_label_create(lv_scr_act(), NULL);
-      lv_label_set_text_fmt(label, "%i/%i", _menuPosition, _maxApps);
-      lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
+      // label = lv_label_create(lv_scr_act(), NULL);
+      // lv_label_set_text_fmt(label, "%i/%i", _menuPosition, _maxApps);
+      // lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
 
       button_image1 = lv_imgbtn_create(lv_scr_act(), NULL);
       lv_imgbtn_set_src(button_image1, LV_BTN_STATE_REL, _app1->_symbol);
@@ -136,7 +136,8 @@ class AppScreen : public Screen
     app_struct* _app2;
     app_struct* _app3;
     app_struct* _app4;
-    lv_obj_t *button_image1, *button_image2, *button_image3, *button_image4, *image_label, *slider, *label;
+    // lv_obj_t *button_image1, *button_image2, *button_image3, *button_image4, *image_label, *slider, *label;
+    lv_obj_t *button_image1, *button_image2, *button_image3, *button_image4, *image_label;
     uint32_t _menuPosition, _maxApps;
 
 };

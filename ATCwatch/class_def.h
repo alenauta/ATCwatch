@@ -9,7 +9,8 @@
 #include "menu.h"
 #include <lvgl.h>
 
-#define DEFAULT_SLEEP_TIMEOUT 10000
+// #define DEFAULT_SLEEP_TIMEOUT 10000
+#define DEFAULT_SLEEP_TIMEOUT 30000 //sleep time to 30 sec
 #define DEFAULT_REFRESH_TIME 40
 
 class Screen_def

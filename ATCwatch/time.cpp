@@ -30,6 +30,7 @@ time_data_struct get_time() {
   time_data.hr = hour();
   time_data.min = minute();
   time_data.sec = second();
+  time_data.weekday = weekday();
   return time_data;
 }
 
