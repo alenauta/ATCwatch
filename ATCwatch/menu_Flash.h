@@ -17,7 +17,7 @@
 #include "push.h"
 #include "flash.h"
 #include "heartrate.h"
-#include "screen_style.h"
+// #include "screen_style.h"
 
 
 class FlashScreen : public Screen
@@ -25,15 +25,15 @@ class FlashScreen : public Screen
   public:
     virtual void pre()
     {
-      label = lv_label_create(lv_scr_act(), NULL);
+      label = lv_label_create(lv_scr_act());
       lv_label_set_text(label, "Flash");
       lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, 10, 0);
 
-      label_x = lv_label_create(lv_scr_act(), NULL);
+      label_x = lv_label_create(lv_scr_act());
       lv_label_set_text(label_x, "0x0000000000000000");
       lv_obj_align(label_x, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 25);
 
-      label_y = lv_label_create(lv_scr_act(), NULL);
+      label_y = lv_label_create(lv_scr_act());
       lv_label_set_text_fmt(label_y, "0x%04X%", flash_read_id());
       lv_obj_align(label_y, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 45);
 

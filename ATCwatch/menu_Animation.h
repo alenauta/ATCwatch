@@ -22,9 +22,9 @@ class AnimationScreen : public Screen
   public:
     virtual void pre()
     {
-      label = lv_label_create(lv_scr_act(), NULL);
+      label = lv_label_create(lv_scr_act());
       lv_label_set_text(label, "Animation");
-      lv_label_set_align(label, LV_LABEL_ALIGN_CENTER);
+      lv_label_set_align(label, LV_ALIGN_CENTER);
       lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, -60);
     }
 

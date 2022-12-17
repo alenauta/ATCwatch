@@ -17,7 +17,7 @@
 // #include "accl.h"
 #include "push.h"
 #include "heartrate.h"
-#include "fonts.h"
+// #include "fonts.h"
 #include "sleep.h"
 #include <lvgl.h>
 
@@ -30,7 +30,8 @@ class HomeScreen : public Screen
       time_data = get_time();
       // accl_data = get_accl_data();
 
-      lv_style_copy( &st, &lv_style_plain );
+      // lv_style_copy( &st, &lv_style_plain );
+      st = lv.style_t();
       st.text.color = lv_color_hsv_to_rgb(10, 5, 95);
       st.text.font = &mksd50;
 

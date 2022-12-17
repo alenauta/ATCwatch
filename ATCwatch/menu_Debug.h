@@ -24,35 +24,35 @@ class DebugScreen : public Screen
   public:
     virtual void pre()
     {
-      label = lv_label_create(lv_scr_act(), NULL);
+      label = lv_label_create(lv_scr_act());
       lv_label_set_text(label, "Debug");
       lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
-      label_millis = lv_label_create(lv_scr_act(), NULL);
+      label_millis = lv_label_create(lv_scr_act());
       lv_label_set_text(label_millis, "Millis:");
       lv_obj_align(label_millis, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 25);
 
-      label_uptime = lv_label_create(lv_scr_act(), NULL);
+      label_uptime = lv_label_create(lv_scr_act());
       lv_label_set_text(label_uptime, "Uptime:");
       lv_obj_align(label_uptime, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 45);
 
-      label_reset = lv_label_create(lv_scr_act(), NULL);
+      label_reset = lv_label_create(lv_scr_act());
       lv_label_set_text_fmt(label_reset, "Reset: %i", NRF_POWER->RESETREAS);
       lv_obj_align(label_reset, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 65);
 
-      label_wakeup = lv_label_create(lv_scr_act(), NULL);
+      label_wakeup = lv_label_create(lv_scr_act());
       lv_label_set_text_fmt(label_wakeup, "Wakeup: %s", wakeup_reason[get_wakeup_reason()]);
       lv_obj_align(label_wakeup, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 85);
 
-      label_debug = lv_label_create(lv_scr_act(), NULL);
+      label_debug = lv_label_create(lv_scr_act());
       lv_label_set_text_fmt(label_debug, "Debugmode: %s", (DWT->CYCCNT ? "Disabled" : "Enabled"));
       lv_obj_align(label_debug, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 105);
 
-      label_button = lv_label_create(lv_scr_act(), NULL);
+      label_button = lv_label_create(lv_scr_act());
       lv_label_set_text_fmt(label_button, "Button pressed: 0ms");
       lv_obj_align(label_button, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 125);
 
-      lv_obj_t * img1 = lv_img_create(lv_scr_act(), NULL);
+      lv_obj_t * img1 = lv_img_create(lv_scr_act());
       lv_img_set_src(img1, &IsymbolDebug);
       lv_obj_align(img1, NULL, LV_ALIGN_IN_BOTTOM_MID, 0, 0);
     }

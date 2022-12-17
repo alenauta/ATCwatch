@@ -27,4 +27,4 @@ void set_swipe_enabled(bool state);
 bool swipe_enabled();
 void inc_vars_menu();
 void dec_vars_menu();
-static void lv_event_handler(lv_obj_t * object, lv_event_t event);
+static void lv_event_handler(lv_event_t *event);

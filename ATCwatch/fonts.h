@@ -2702,7 +2702,7 @@ static lv_font_fmt_txt_dsc_t bfont_dsc = {
  *----------------*/
 
 /*Initialize a public general font descriptor*/
-lv_font_t mksd50 = {
+const lv_font_t mksd50 = {
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
     .line_height = 71,          /*The maximum line height required by the font*/
@@ -4840,7 +4840,7 @@ static lv_font_fmt_txt_dsc_t font_dsc = {
  *----------------*/
 
 /*Initialize a public general font descriptor*/
-lv_font_t sans_regular = {
+const lv_font_t sans_regular = {
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
     .line_height = 18,          /*The maximum line height required by the font*/
@@ -7125,7 +7125,7 @@ static lv_font_fmt_txt_dsc_t cfont_dsc = {
  *----------------*/
 
 /*Initialize a public general font descriptor*/
-lv_font_t sans_bold = {
+const lv_font_t sans_bold = {
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
     .line_height = 20,          /*The maximum line height required by the font*/
@@ -9963,7 +9963,7 @@ static lv_font_fmt_txt_dsc_t hfont_dsc = {
  *----------------*/
 
 /*Initialize a public general font descriptor*/
-lv_font_t sans_bold28 = {
+const lv_font_t sans_bold28 = {
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
     .line_height = 32,          /*The maximum line height required by the font*/
@@ -10361,11 +10361,7 @@ static lv_font_fmt_txt_dsc_t nfont_dsc = {
  *----------------*/
 
 /*Initialize a public general font descriptor*/
-#if LV_VERSION_CHECK(8, 0, 0)
 const lv_font_t mksd90 = {
-#else
-lv_font_t mksd90 = {
-#endif
     .get_glyph_dsc = lv_font_get_glyph_dsc_fmt_txt,    /*Function pointer to get glyph's data*/
     .get_glyph_bitmap = lv_font_get_bitmap_fmt_txt,    /*Function pointer to get glyph's bitmap*/
     .line_height = 64,          /*The maximum line height required by the font*/

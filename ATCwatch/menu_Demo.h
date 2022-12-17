@@ -25,12 +25,12 @@ class DemoScreen : public Screen
     {
       set_swipe_enabled(true);
 
-      label = lv_label_create(lv_scr_act(), NULL);
+      label = lv_label_create(lv_scr_act());
       lv_label_set_text(label, "Demo");
       lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
       
 
-      slider = lv_slider_create(lv_scr_act(), NULL);
+      slider = lv_slider_create(lv_scr_act());
       lv_obj_align(slider, NULL, LV_ALIGN_CENTER, 0, 0);
     }
 

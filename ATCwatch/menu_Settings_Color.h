@@ -104,13 +104,13 @@ class SettingsColorScreen : public Screen
         set_motor_ms(35);
       } else if (object == ddlist_main && event == LV_EVENT_VALUE_CHANGED) {
         set_main_color(lv_ddlist_get_selected(ddlist_main));
-        set_gray_screen_style();
+        // set_gray_screen_style();
       } else if (object == ddlist_grad && event == LV_EVENT_VALUE_CHANGED) {
         set_grad_color(lv_ddlist_get_selected(ddlist_grad));
-        set_gray_screen_style();
+        // set_gray_screen_style();
       } else if (object == ddlist_font && event == LV_EVENT_VALUE_CHANGED) {
         set_font_color(lv_ddlist_get_selected(ddlist_font));
-        set_gray_screen_style();
+        // set_gray_screen_style();
       }
     }
 

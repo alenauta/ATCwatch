@@ -21,79 +21,158 @@
 #include "time.h"
 #include "push.h"
 
-#define buffer_lcd_size LV_HOR_RES_MAX * 30
-static lv_disp_buf_t disp_buf;
-static lv_color_t buf[buffer_lcd_size];
+// #define buffer_lcd_size LV_HOR_RES_MAX * 30
+// static lv_disp_buf_t disp_buf;
+// static lv_color_t buf[buffer_lcd_size];
+
+static const uint16_t screenWidth = 240;
+static const uint16_t screenHeight = 240;
+
+static lv_disp_draw_buf_t draw_buf;
+static lv_color_t buf[screenWidth * 10];
+
+// void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
+// {
+//   uint32_t w = (area->x2 - area->x1 + 1);
+//   uint32_t h = (area->y2 - area->y1 + 1);
+//   startWrite_display();
+//   setAddrWindowDisplay(area->x1, area->y1, w, h);
+//   write_fast_spi(reinterpret_cast<const uint8_t *>(color_p), (w * h * 2));
+//   endWrite_display();
+//   lv_disp_flush_ready(disp);
+// }
 
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
   uint32_t w = (area->x2 - area->x1 + 1);
   uint32_t h = (area->y2 - area->y1 + 1);
+
   startWrite_display();
   setAddrWindowDisplay(area->x1, area->y1, w, h);
   write_fast_spi(reinterpret_cast<const uint8_t *>(color_p), (w * h * 2));
   endWrite_display();
+
   lv_disp_flush_ready(disp);
 }
 
-bool my_touchpad_read(lv_indev_drv_t * indev_driver, lv_indev_data_t * data)
+void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
 {
   bool touched = false;
   touch_data_struct touch_data;
-  if (swipe_enabled()) {
+  if (swipe_enabled())
+  {
     get_read_touch();
     touch_data = get_touch();
     touched = (touch_data.event == 2) ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
     get_new_touch_interrupt();
-  } else {
-    if (get_new_touch_interrupt()) {
+  }
+  else
+  {
+    if (get_new_touch_interrupt())
+    {
       touch_data = get_touch();
       touched = (touch_data.gesture == TOUCH_SINGLE_CLICK) ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
-    } else {
+    }
+    else
+    {
       touched = LV_INDEV_STATE_REL;
     }
   }
-  data->state = touched;
+  // data->state = touched;
+  data->state = LV_INDEV_STATE_PR;
   data->point.x = touch_data.xpos;
   data->point.y = touch_data.ypos;
-  return false;
+  // return false;
 }
+
+// void my_touchpad_read( lv_indev_drv_t * indev_driver, lv_indev_data_t * data )
+// {
+//     uint16_t touchX, touchY;
+
+//     bool touched = tft.getTouch( &touchX, &touchY, 600 );
+
+//     if( !touched )
+//     {
+//         data->state = LV_INDEV_STATE_REL;
+//     }
+//     else
+//     {
+//         data->state = LV_INDEV_STATE_PR;
+
+//         /*Set the coordinates*/
+//         data->point.x = touchX;
+//         data->point.y = touchY;
+
+//         Serial.print( "Data x " );
+//         Serial.println( touchX );
+
+//         Serial.print( "Data y " );
+//         Serial.println( touchY );
+//     }
+// }
 
 void inc_tick() {
   lv_tick_inc(40);
 }
 
-void init_display() {
+
+
+void init_display()
+{
   initDisplay();
   lv_init();
-  lv_disp_buf_init(&disp_buf, buf, NULL, buffer_lcd_size);
 
-  lv_disp_drv_t disp_drv;
+  lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * 10);
+
+  /*Initialize the display*/
+  static lv_disp_drv_t disp_drv;
   lv_disp_drv_init(&disp_drv);
-  disp_drv.hor_res = 240;
-  disp_drv.ver_res = 240;
+  disp_drv.hor_res = screenWidth;
+  disp_drv.ver_res = screenHeight;
   disp_drv.flush_cb = my_disp_flush;
-  disp_drv.buffer = &disp_buf;
+  disp_drv.draw_buf = &draw_buf;
   lv_disp_drv_register(&disp_drv);
 
-  lv_indev_drv_t indev_drv;
+  /*Initialize the (dummy) input device driver*/
+  static lv_indev_drv_t indev_drv;
   lv_indev_drv_init(&indev_drv);
   indev_drv.type = LV_INDEV_TYPE_POINTER;
   indev_drv.read_cb = my_touchpad_read;
-
   lv_indev_drv_register(&indev_drv);
 
-  lv_theme_t *th = lv_theme_night_init(10, NULL);
-  lv_theme_set_current(th);
+
+  // lv_disp_buf_init(&disp_buf, buf, NULL, buffer_lcd_size);
+
+  // lv_disp_drv_t disp_drv;
+  // lv_disp_drv_init(&disp_drv);
+  // disp_drv.hor_res = 240;
+  // disp_drv.ver_res = 240;
+  // disp_drv.flush_cb = my_disp_flush;
+  // disp_drv.buffer = &disp_buf;
+  // lv_disp_drv_register(&disp_drv);
+
+  // lv_indev_drv_t indev_drv;
+  // lv_indev_drv_init(&indev_drv);
+  // indev_drv.type = LV_INDEV_TYPE_POINTER;
+  // indev_drv.read_cb = my_touchpad_read;
+
+  // lv_indev_drv_register(&indev_drv);
+
+  // lv_theme_t *th = lv_theme_night_init(10, NULL);
+  // lv_theme_set_current(th);
 }
 
-void display_enable(bool state) {
+void display_enable(bool state)
+{
   uint8_t temp[2];
   startWrite_display();
-  if (state) {
+  if (state)
+  {
     spiCommand(ST77XX_DISPON);
     spiCommand(ST77XX_SLPOUT);
-  } else {
+  }
+  else
+  {
     spiCommand(ST77XX_SLPIN);
     spiCommand(ST77XX_DISPOFF);
   }
@@ -103,7 +182,7 @@ void display_enable(bool state) {
 void setAddrWindowDisplay(uint32_t x, uint32_t y, uint32_t w, uint32_t h)
 {
   uint8_t temp[4];
-  //y += 80; // when rotated screen
+  // y += 80; // when rotated screen
   spiCommand(0x2A);
   temp[0] = (x >> 8);
   temp[1] = x;
@@ -111,7 +190,7 @@ void setAddrWindowDisplay(uint32_t x, uint32_t y, uint32_t w, uint32_t h)
   temp[3] = (x + w - 1);
   write_fast_spi(temp, 4);
   spiCommand(0x2B);
-  temp[0] = (y >> 8 );
+  temp[0] = (y >> 8);
   temp[1] = y;
   temp[2] = ((y + h - 1) >> 8);
   temp[3] = ((y + h - 1) & 0xFF);
@@ -119,15 +198,16 @@ void setAddrWindowDisplay(uint32_t x, uint32_t y, uint32_t w, uint32_t h)
   spiCommand(0x2C);
 }
 
-void initDisplay() {
+void initDisplay()
+{
   uint8_t temp[25];
   pinMode(LCD_CS, OUTPUT);
   pinMode(LCD_RS, OUTPUT);
   pinMode(LCD_RESET, OUTPUT);
   pinMode(LCD_DET, OUTPUT);
 
-  digitalWrite(LCD_CS , HIGH);
-  digitalWrite(LCD_RS , HIGH);
+  digitalWrite(LCD_CS, HIGH);
+  digitalWrite(LCD_RS, HIGH);
 
   digitalWrite(LCD_RESET, HIGH);
   delay(20);
@@ -137,7 +217,7 @@ void initDisplay() {
   delay(100);
   startWrite_display();
   spiCommand(54);
-  temp[0] = 0x40;// rotation for P8b
+  temp[0] = 0x40; // rotation for P8b
   write_fast_spi(temp, 1);
   spiCommand(58);
   temp[0] = 5;
@@ -206,7 +286,7 @@ void initDisplay() {
   temp[12] = 32;
   temp[13] = 35;
   write_fast_spi(temp, 14);
-  //spiCommand(33); // colors inversion (33=on, 32=off)
+  // spiCommand(33); // colors inversion (33=on, 32=off)
   spiCommand(17);
   delay(120);
   spiCommand(41);
@@ -215,18 +295,21 @@ void initDisplay() {
   endWrite_display();
 }
 
-void spiCommand(uint8_t d) {
-  digitalWrite(LCD_RS , LOW);
+void spiCommand(uint8_t d)
+{
+  digitalWrite(LCD_RS, LOW);
   write_fast_spi(&d, 1);
-  digitalWrite(LCD_RS , HIGH);
+  digitalWrite(LCD_RS, HIGH);
 }
 
-void startWrite_display(void) {
+void startWrite_display(void)
+{
   enable_spi(true);
-  digitalWrite(LCD_CS , LOW);
+  digitalWrite(LCD_CS, LOW);
 }
 
-void endWrite_display(void) {
-  digitalWrite(LCD_CS , HIGH);
+void endWrite_display(void)
+{
+  digitalWrite(LCD_CS, HIGH);
   enable_spi(false);
 }
