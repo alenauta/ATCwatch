@@ -27,12 +27,15 @@ class ChargingScreen : public Screen
       lv_label_set_text(label, "Charging");
       lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, -30);
 
-      lv_style_copy( &st, &lv_style_plain );
-      st.text.color = lv_color_hsv_to_rgb(10, 5, 95);
-      st.text.font = &mksd50;
+      // lv_style_copy( &st, &lv_style_plain );
+      lv_style_init(&st);
+      // st.text.color = lv_color_hsv_to_rgb(10, 5, 95);
+      lv_style_set_text_color(&st,LV_STATE_DEFAULT,lv_color_hsv_to_rgb(10, 5, 95));
+      // st.text.font = &mksd50;
+      lv_style_set_text_font(&st,LV_STATE_DEFAULT,&lv_font_montserrat_48);
 
       label_battery_big = lv_label_create(lv_scr_act(), NULL);
-      lv_obj_set_style( label_battery_big, &st );
+      lv_obj_add_style( label_battery_big, LV_LABEL_PART_MAIN, &st );
       lv_label_set_text(label_battery_big, "---%");
       lv_obj_align(label_battery_big, lv_scr_act(), LV_ALIGN_CENTER, -20, 20);
     }

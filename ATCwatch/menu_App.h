@@ -52,9 +52,9 @@ class AppScreen : public Screen
       // lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);
 
       button_image1 = lv_imgbtn_create(lv_scr_act(), NULL);
-      lv_imgbtn_set_src(button_image1, LV_BTN_STATE_REL, _app1->_symbol);
-      lv_imgbtn_set_src(button_image1, LV_BTN_STATE_PR, _app1->_symbol);
-      lv_imgbtn_set_toggle(button_image1, false);
+      lv_imgbtn_set_src(button_image1, LV_BTN_STATE_RELEASED, _app1->_symbol);
+      lv_imgbtn_set_src(button_image1, LV_BTN_STATE_PRESSED, _app1->_symbol);
+      lv_imgbtn_toggle(button_image1);
       lv_obj_set_pos(button_image1, 32, 28);
       lv_obj_set_event_cb(button_image1, lv_event_handler);
 
@@ -63,9 +63,9 @@ class AppScreen : public Screen
       lv_obj_align(image_label, button_image1, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 2);
 
       button_image2 = lv_imgbtn_create(lv_scr_act(), NULL);
-      lv_imgbtn_set_src(button_image2, LV_BTN_STATE_REL, _app2->_symbol);
-      lv_imgbtn_set_src(button_image2, LV_BTN_STATE_PR, _app2->_symbol);
-      lv_imgbtn_set_toggle(button_image2, false);
+      lv_imgbtn_set_src(button_image2, LV_BTN_STATE_RELEASED, _app2->_symbol);
+      lv_imgbtn_set_src(button_image2, LV_BTN_STATE_PRESSED, _app2->_symbol);
+      lv_imgbtn_toggle(button_image2);
       lv_obj_set_pos(button_image2, 136, 28);
       lv_obj_set_event_cb(button_image2, lv_event_handler);
 
@@ -74,9 +74,9 @@ class AppScreen : public Screen
       lv_obj_align(image_label, button_image2, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 2);
 
       button_image3 = lv_imgbtn_create(lv_scr_act(), NULL);
-      lv_imgbtn_set_src(button_image3, LV_BTN_STATE_REL, _app3->_symbol);
-      lv_imgbtn_set_src(button_image3, LV_BTN_STATE_PR, _app3->_symbol);
-      lv_imgbtn_set_toggle(button_image3, false);
+      lv_imgbtn_set_src(button_image3, LV_BTN_STATE_RELEASED, _app3->_symbol);
+      lv_imgbtn_set_src(button_image3, LV_BTN_STATE_PRESSED, _app3->_symbol);
+      lv_imgbtn_toggle(button_image3);
       lv_obj_set_pos(button_image3, 32, 132);
       lv_obj_set_event_cb(button_image3, lv_event_handler);
 
@@ -85,9 +85,9 @@ class AppScreen : public Screen
       lv_obj_align(image_label, button_image3, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 2);
 
       button_image4 = lv_imgbtn_create(lv_scr_act(), NULL);
-      lv_imgbtn_set_src(button_image4, LV_BTN_STATE_REL, _app4->_symbol);
-      lv_imgbtn_set_src(button_image4, LV_BTN_STATE_PR, _app4->_symbol);
-      lv_imgbtn_set_toggle(button_image4, false);
+      lv_imgbtn_set_src(button_image4, LV_BTN_STATE_RELEASED, _app4->_symbol);
+      lv_imgbtn_set_src(button_image4, LV_BTN_STATE_PRESSED, _app4->_symbol);
+      lv_imgbtn_toggle(button_image4);
       lv_obj_set_pos(button_image4, 136, 132);
       lv_obj_set_event_cb(button_image4, lv_event_handler);
 

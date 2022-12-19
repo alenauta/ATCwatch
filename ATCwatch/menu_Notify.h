@@ -16,7 +16,7 @@
 // #include "accl.h"
 #include "push.h"
 #include "heartrate.h"
-#include "fonts.h"
+// #include "fonts.h"
 
 
 class NotifyScreen : public Screen
@@ -24,7 +24,7 @@ class NotifyScreen : public Screen
   public:
     virtual void pre()
     {
-      set_gray_screen_style(&sans_regular);
+      set_gray_screen_style(&lv_font_montserrat_14);
 
       lv_obj_t * img1 = lv_img_create(lv_scr_act(), NULL);
       lv_img_set_src(img1, &IsymbolMsg);

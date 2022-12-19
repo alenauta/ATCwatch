@@ -17,7 +17,7 @@
 // #include "accl.h"
 #include "push.h"
 #include "heartrate.h"
-#include "fonts.h"
+// #include "fonts.h"
 #include "sleep.h"
 #include <lvgl.h>
 #include <TimeLib.h>
@@ -30,32 +30,38 @@ public:
     time_data = get_time();
     // accl_data = get_accl_data();
 
-    lv_style_copy(&st, &lv_style_plain);
-    st.text.color = lv_color_hex(0x1acc10);
-    st.text.font = &mksd90;
+    // lv_style_copy(&st, &lv_style_plain);
+    lv_style_init(&st);
+    // st.text.color = lv_color_hex(0x1acc10);
+    lv_style_set_text_color(&st,LV_STATE_DEFAULT,lv_color_hex(0x1acc10));
+    // st.text.font = &mksd90;
+    lv_style_set_text_font(&st,LV_STATE_DEFAULT,&lv_font_montserrat_48);
 
     // TIME
     label_hours = lv_label_create(lv_scr_act(), NULL);
     lv_label_set_text_fmt(label_hours, "%02i", time_data.hr);
-    lv_obj_set_style(label_hours, &st);
+    lv_obj_add_style(label_hours, LV_LABEL_PART_MAIN, &st);
     lv_obj_align(label_hours, lv_scr_act(), LV_ALIGN_IN_TOP_MID, 0, 30);
     label_mins = lv_label_create(lv_scr_act(), NULL);
     lv_label_set_text_fmt(label_mins, "%02i", time_data.min);
-    lv_obj_set_style(label_mins, &st);
+    lv_obj_add_style(label_mins, LV_LABEL_PART_MAIN, &st);
     lv_obj_align(label_mins, label_hours, LV_ALIGN_OUT_RIGHT_TOP, 0, 0);
 
-    lv_style_copy(&st_m, &lv_style_plain);
-    st_m.text.color = lv_color_hex(0x1acc10);
-    st_m.text.font = LV_FONT_DEFAULT;
+    // lv_style_copy(&st_m, &lv_style_plain);
+    lv_style_init(&st_m);
+    // st_m.text.color = lv_color_hex(0x1acc10);
+    lv_style_set_text_color(&st,LV_STATE_DEFAULT,lv_color_hex(0x1acc10));
+    // st_m.text.font = LV_FONT_DEFAULT;
+    lv_style_set_text_font(&st_m,LV_STATE_DEFAULT,&lv_font_montserrat_14);
 
     // WEEKDAY
     label_weekday = lv_label_create(lv_scr_act(), NULL);
-    lv_obj_set_style(label_weekday, &st_m);
+    lv_obj_add_style(label_weekday, LV_LABEL_PART_MAIN, &st_m);
     lv_obj_align(label_weekday, label_hours, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
 
     // DATE
     label_date = lv_label_create(lv_scr_act(), NULL);
-    lv_obj_set_style(label_date, &st_m);
+    lv_obj_add_style(label_date, LV_LABEL_PART_MAIN, &st_m);
     lv_obj_align(label_date, label_weekday, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 0);
 
     // BATTERY
@@ -63,19 +69,22 @@ public:
     lv_obj_align(label_battery, lv_scr_act(), LV_ALIGN_IN_TOP_RIGHT, -10, 5);
     lv_label_set_text_fmt(label_battery, "%i%%", get_battery_percent());
 
-    lv_style_copy(&style_battery, lv_label_get_style(label_battery, LV_LABEL_STYLE_MAIN));
-    style_battery.text.color = lv_color_hsv_to_rgb(10, 5, 95);
-    lv_obj_set_style(label_battery, &style_battery);
+    // lv_style_copy(&style_battery, lv_label_get_style(label_battery, LV_LABEL_STYLE_MAIN));
+    // style_battery.text.color = lv_color_hsv_to_rgb(10, 5, 95);
+    lv_style_set_text_color(&style_battery,LV_STATE_DEFAULT,lv_color_hsv_to_rgb(10, 5, 95));
+    lv_obj_add_style(label_battery, LV_LABEL_PART_MAIN, &style_battery);
 
     // BLE
     label_ble = lv_label_create(lv_scr_act(), NULL);
     lv_obj_align(label_ble, lv_scr_act(), LV_ALIGN_IN_TOP_LEFT, 5, 5);
     lv_label_set_text(label_ble, LV_SYMBOL_BLUETOOTH);
 
-    lv_style_copy(&style_ble, lv_label_get_style(label_ble, LV_LABEL_STYLE_MAIN));
-    style_ble.text.color = LV_COLOR_GRAY;
-    style_ble.text.font = LV_FONT_DEFAULT;
-    lv_obj_set_style(label_ble, &style_ble);
+    // lv_style_copy(&style_ble, lv_label_get_style(label_ble, LV_LABEL_STYLE_MAIN));
+    // style_ble.text.color = LV_COLOR_GRAY;
+    lv_style_set_text_color(&style_ble,LV_STATE_DEFAULT,LV_COLOR_GRAY);
+    // style_ble.text.font = LV_FONT_DEFAULT;
+    lv_style_set_text_font(&style_ble,LV_STATE_DEFAULT,&lv_font_montserrat_14);
+    lv_obj_add_style(label_ble, LV_LABEL_PART_MAIN, &style_ble);
 
     // HEART
     // img_heart = lv_img_create(lv_scr_act(), NULL);
@@ -104,10 +113,12 @@ public:
 
     label_msg = lv_label_create(lv_scr_act(), NULL);
 
-    lv_style_copy(&style_msg, lv_label_get_style(label_ble, LV_LABEL_STYLE_MAIN));
-    style_msg.text.color = lv_color_hsv_to_rgb(10, 5, 95);
-    style_msg.text.font = &sans_regular;
-    lv_obj_set_style(label_msg, &style_msg);
+    // lv_style_copy(&style_msg, lv_label_get_style(label_ble, LV_LABEL_STYLE_MAIN));
+    // style_msg.text.color = lv_color_hsv_to_rgb(10, 5, 95);
+    lv_style_set_text_color(&style_msg,LV_STATE_DEFAULT,lv_color_hsv_to_rgb(10, 5, 95));
+    // style_msg.text.font = &sans_regular;
+    lv_style_set_text_font(&style_msg,LV_STATE_DEFAULT,&lv_font_montserrat_12);
+    lv_obj_add_style(label_msg, LV_LABEL_PART_MAIN, &style_msg);
 
     lv_obj_set_width(label_msg, 240);
     lv_label_set_text(label_msg, " ");
@@ -133,17 +144,21 @@ public:
     // lv_label_set_text_fmt(label_steps, "%s", monthStr(time_data.month));
 
     if (get_vars_ble_connected())
-      style_ble.text.color = lv_color_hex(0x0082FC);
+      // style_ble.text.color = lv_color_hex(0x0082FC);
+      lv_style_set_text_color(&style_ble,LV_STATE_DEFAULT,lv_color_hex(0x0082FC));
       // style_ble.text.color = LV_COLOR_BLUE;
     else
-      style_ble.text.color = LV_COLOR_GRAY;
-    lv_obj_set_style(label_ble, &style_ble);
+      // style_ble.text.color = LV_COLOR_GRAY;
+      lv_style_set_text_color(&style_ble,LV_STATE_DEFAULT,LV_COLOR_GRAY);
+    lv_obj_add_style(label_ble, LV_LABEL_PART_MAIN, &style_ble);
 
     if (get_charge())
-      style_battery.text.color = lv_color_hsv_to_rgb(10, 5, 95);
+      // style_battery.text.color = lv_color_hsv_to_rgb(10, 5, 95);
+      lv_style_set_text_color(&style_battery,LV_STATE_DEFAULT,lv_color_hsv_to_rgb(10, 5, 95));
     else
-      style_battery.text.color = LV_COLOR_MAKE(0x05, 0xF9, 0x25);
-    lv_obj_set_style(label_battery, &style_battery);
+      // style_battery.text.color = LV_COLOR_MAKE(0x05, 0xF9, 0x25);
+      lv_style_set_text_color(&style_battery,LV_STATE_DEFAULT,LV_COLOR_MAKE(0x05, 0xF9, 0x25));
+    lv_obj_add_style(label_battery, LV_LABEL_PART_MAIN, &style_battery);
   }
 
   virtual void up()

@@ -17,7 +17,7 @@
 #include "push.h"
 #include "inputoutput.h"
 #include "heartrate.h"
-#include "fonts.h"
+// #include "fonts.h"
 
 class HeartScreen : public Screen
 {
@@ -31,33 +31,45 @@ public:
     lv_obj_set_pos(heart, 10, 10);
     lv_img_set_src(heart, &heart1);
 
-    lv_style_copy(&styleBIG, &lv_style_plain);
-    lv_style_copy(&styleSMALL, &lv_style_plain);
+    // lv_style_copy(&styleBIG, &lv_style_plain);
+    // lv_style_copy(&styleSMALL, &lv_style_plain);
+    lv_style_init(&styleBIG);
+    lv_style_init(&styleSMALL);
 
-    styleBIG.text.font = &mksd90;
+    // styleBIG.text.font = &mksd90;
+    lv_style_set_text_font(&styleBIG,LV_STATE_DEFAULT,&lv_font_montserrat_48);
     label_hr = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_style(label_hr, LV_LABEL_STYLE_MAIN, &styleBIG);
+    // lv_label_set_style(label_hr, LV_LABEL_STYLE_MAIN, &styleBIG);
+    lv_obj_reset_style_list(label_hr, LV_LABEL_PART_MAIN);
+    lv_obj_add_style(label_hr, LV_LABEL_PART_MAIN, &styleBIG);
     lv_label_set_text(label_hr, "--");
     lv_obj_set_pos(label_hr, 20, 90);
 
 
-    styleSMALL.text.font = &lv_font_roboto_22;
+    // styleSMALL.text.font = &lv_font_montserrat_22;
+    lv_style_set_text_font(&styleSMALL,LV_STATE_DEFAULT,&lv_font_montserrat_22);
     label_2 = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_style(label_2, LV_LABEL_STYLE_MAIN, &styleSMALL);
+    // lv_label_set_style(label_2, LV_LABEL_STYLE_MAIN, &styleSMALL);
+    lv_obj_reset_style_list(label_2, LV_LABEL_PART_MAIN);
+    lv_obj_add_style(label_2, LV_LABEL_PART_MAIN, &styleSMALL);
     lv_label_set_text(label_2, "BPM");
     lv_obj_set_pos(label_2, 100, 90);
 
 
-    // styleSMALL.text.font = &lv_font_roboto_12;
+    // styleSMALL.text.font = &lv_font_montserrat_12;
     label_3 = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_style(label_3, LV_LABEL_STYLE_MAIN, &styleSMALL);
+    // lv_label_set_style(label_3, LV_LABEL_STYLE_MAIN, &styleSMALL);
+    lv_obj_reset_style_list(label_3, LV_LABEL_PART_MAIN);
+    lv_obj_add_style(label_3, LV_LABEL_PART_MAIN, &styleSMALL);
     lv_label_set_text(label_3, "LAST HR:");
     lv_obj_set_pos(label_3, 10, 179);
 
 
-    // style.text.font = &lv_font_roboto_28;
+    // style.text.font = &lv_font_montserrat_28;
     label_hr_last = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_style(label_hr_last, LV_LABEL_STYLE_MAIN, &styleSMALL);
+    // lv_label_set_style(label_hr_last, LV_LABEL_STYLE_MAIN, &styleSMALL);
+    lv_obj_reset_style_list(label_hr_last, LV_LABEL_PART_MAIN);
+    lv_obj_add_style(label_hr_last, LV_LABEL_PART_MAIN, &styleSMALL);
     lv_label_set_text(label_hr_last, "00");
     lv_obj_set_pos(label_hr_last, 110, 179);
 
@@ -94,7 +106,7 @@ public:
     //  lv_label_set_text(label, "Heartrate");
     //  lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
-    // set_gray_screen_style(&lv_font_roboto_28);
+    // set_gray_screen_style(&lv_font_montserrat_28);
 
     // label_hr = lv_label_create(lv_scr_act(), NULL);
     // lv_label_set_text(label_hr, "HR:");
