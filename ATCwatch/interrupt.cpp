@@ -12,7 +12,6 @@
 // #include "accl.h"
 #include "touch.h"
 #include "inputoutput.h"
-#include "inputoutput.h"
 #include "battery.h"
 
 long last_button_press = 0;
