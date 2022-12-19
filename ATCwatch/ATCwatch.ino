@@ -22,12 +22,12 @@
 #include "menu.h"
 #include "display.h"
 // #include "accl.h"
-#include "SparkFun_LIS2DH12.h"
+// #include "SparkFun_LIS2DH12.h"
 #include "push.h"
 #include "flash.h"
 
 bool stepsWhereReseted = false;
-SPARKFUN_LIS2DH12 accel;
+// SPARKFUN_LIS2DH12 accel;
 
 void setup()
 {
@@ -57,7 +57,7 @@ void setup()
   init_push();
   init_flash();
   // init_accl();
-  accel.begin();
+  // accel.begin();
   init_ble();       // must be before interrupts!!!
   init_interrupt(); // must be after ble!!!
   delay(100);
