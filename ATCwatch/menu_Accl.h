@@ -13,8 +13,7 @@
 #include "ble.h"
 #include "time.h"
 #include "battery.h"
-// #include "accl.h"
-#include "SparkFun_LIS2DH12.h"
+#include "accl.h"
 #include "push.h"
 #include "heartrate.h"
 #include "screen_style.h"
@@ -24,9 +23,10 @@ class AcclScreen : public Screen
 public:
   virtual void pre()
   {
+    start_accl();
 
     label = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_text(label, "Accl");
+    lv_label_set_text(label, "Accelerometer Test");
     lv_obj_align(label, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
     label_x = lv_label_create(lv_scr_act(), NULL);
@@ -40,78 +40,38 @@ public:
     lv_obj_align(label_z, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 65);
     label_temp = lv_label_create(lv_scr_act(), NULL);
     lv_obj_align(label_temp, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 85);
-
-    // label_steps = lv_label_create(lv_scr_act(), NULL);
-    // lv_label_set_text(label_steps, "Steps:");
-    // lv_obj_align(label_steps, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 105);
-    // label_activity = lv_label_create(lv_scr_act(), NULL);
-    // lv_label_set_text(label_activity, "Activity:");
-    // lv_obj_align(label_activity, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 125);
-
-    if (accel.begin() == false)
-    {
-      lv_label_set_text_fmt(label, "begin FALSE");
-      fail = true;
-    }
-
-    accel.setMode(LIS2DH12_LP_8bit);
-    accel.setDataRate(LIS2DH12_ODR_1Hz);
-    accel.setScale(LIS2DH12_2g);
-    // accel.disableTemperature();
   }
 
   virtual void main()
   {
-    // accl_data_struct accl_data = get_accl_data();
 
-    // lv_label_set_text_fmt(label_x, "X: %i", accl_data.x);
-    // lv_label_set_text_fmt(label_y, "Y: %i", accl_data.y);
-    // lv_label_set_text_fmt(label_z, "Z: %i", accl_data.z);
-    // lv_label_set_text_fmt(label_temp, "Temp: %i", accl_data.temp);
-    // lv_label_set_text_fmt(label_steps, "Steps: %i", accl_data.steps);
-    // lv_label_set_text_fmt(label_activity, "Activity: %i", accl_data.activity);
+    accl_data_struct data = get_accl_data();
+    String look = (get_is_looked_at()) ? "YES\0" : "NO\0";
 
-    if (accel.available() and !fail)
-    // if (accel.available())
-    {
-      lv_label_set_text_fmt(label, "Accl available");
-      int accelX = (int)(accel.getX() / 10);
-      int accelY = (int)(accel.getY() / 10);
-      int accelZ = (int)(accel.getZ() / 10);
-      look = (get_is_looked_at(accelX, accelY, accelZ)) ? "YES\0" : "NO\0";
+    lv_label_set_text_fmt(label_x, "X: %i", data.x);
+    lv_label_set_text_fmt(label_y, "Y: %i", data.y);
+    lv_label_set_text_fmt(label_z, "Z: %i", data.z);
+    lv_label_set_text(label_temp, look.c_str());
 
-      lv_label_set_text_fmt(label_x, "X: %i", accelX);
-      lv_label_set_text_fmt(label_y, "Y: %i", accelY);
-      lv_label_set_text_fmt(label_z, "Z: %i", accelZ);
-      lv_label_set_text(label_temp, look.c_str());
+    // lv_label_set_text_fmt(label_temp, "Temp: %g", tempC);
+  }
 
-      // lv_label_set_text_fmt(label_temp, "Temp: %g", tempC);
-    }
+  virtual void post()
+  {
+    end_accl();
+  }
+
+  virtual uint32_t sleepTime()
+  {
+    return 50000;
   }
 
   virtual void right()
   {
-    accel.setDataRate(LIS2DH12_POWER_DOWN); // Stop measurements
     set_last_menu();
   }
 
-  virtual void down()
-  {
-    // lv_label_set_text_fmt(label_temp, "Is looked at: %s", look);
-  }
-
-  bool get_is_looked_at(int x, int y, int z)
-  {
-    // if ((y + 30) <= 60 && (x + 30) <= 60 && z < 10)
-    if ((-75 <= x && x <= 60) && (-60 <= y && y <= 60) && z < 10)
-      return true;
-    return false;
-  }
-
 private:
-  SPARKFUN_LIS2DH12 accel;
-  String look;
-  bool fail = false;
   lv_obj_t *label, *label_x, *label_y, *label_z;
   lv_obj_t *label_temp, *label_steps, *label_activity;
 };

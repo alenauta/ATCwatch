@@ -9,7 +9,7 @@
 #include "i2c.h"
 #include "menu.h"
 #include "sleep.h"
-// #include "accl.h"
+#include "accl.h"
 #include "touch.h"
 #include "inputoutput.h"
 #include "inputoutput.h"
@@ -183,7 +183,7 @@ void interrupt_charge() {
     set_led_ms(1000);
   else {
     set_motor_ms();
-    display_charging();
+    // display_charging();
   }
 }
 

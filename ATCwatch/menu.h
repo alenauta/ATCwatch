@@ -15,6 +15,7 @@ void init_menu();
 void display_home();
 void display_notify();
 void display_charging();
+void display_widgets();
 void display_booting();
 void display_screen(bool ignoreWait = false);
 void check_button_push(int length);

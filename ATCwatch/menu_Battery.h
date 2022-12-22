@@ -16,6 +16,7 @@
 // #include "accl.h"
 #include "push.h"
 #include "heartrate.h"
+#include "fonts.h"
 
 
 class BatteryScreen : public Screen
@@ -33,7 +34,7 @@ class BatteryScreen : public Screen
 
       lv_style_copy( &st, &lv_style_plain );
       st.text.color = lv_color_hsv_to_rgb(10, 5, 95);
-      st.text.font = &mksd50;
+      st.text.font = &sharetech60;
 
       label_battery_big = lv_label_create(lv_scr_act(), NULL);
       lv_obj_set_style( label_battery_big, &st );

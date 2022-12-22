@@ -1,0 +1,25 @@
+#! /usr/bin/env zsh
+
+name=${1%.*}
+size=$(echo $name | sed -E "s/.+([0-9]{2})/\1/")
+font=$(echo $name | sed -E "s/(.+)[0-9]{2}$/\1/")
+upper=${font:u}
+
+# echo $name
+# echo $size
+# echo $font
+# echo $upper
+
+# sed -E -i '' "s/($upper)/\1$size/g" $1
+# sed -E -i '' "s/($font)/\1$size/g" $1
+sed -E -i '' "s/glyph_bitmap\[\]/glyph_bitmap_$name\[\]/g" $1
+sed -E -i '' "s/glyph_bitmap,/glyph_bitmap_$name\,/g" $1
+sed -E -i '' "s/glyph_dsc\[\]/glyph_dsc_$name\[\]/g" $1
+sed -E -i '' "s/glyph_dsc,/glyph_dsc_$name\,/g" $1
+sed -E -i '' "s/cmaps\[\]/cmaps_$name\[\]/g" $1
+sed -E -i '' "s/cmaps,/cmaps_$name\,/g" $1
+sed -E -i '' "s/kern_pairs/kern_pairs_$name/g" $1
+sed -E -i '' "s/kern_pair_glyph_ids/kern_pair_glyph_ids_$name/g" $1
+sed -E -i '' "s/kern_pair_values/kern_pair_values_$name/g" $1
+sed -E -i '' "s/font_dsc/font_dsc_$name/g" $1
+perl -0777 -p -i -e 's/#ifdef LV_LVGL_H_INCLUDE_SIMPLE(?s).*?#endif/#pragma once\n#include <lvgl.h>/g' $1

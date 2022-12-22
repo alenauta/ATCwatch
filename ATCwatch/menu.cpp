@@ -32,11 +32,12 @@
 #include "menu_App.h"
 // #include "menu_Demo.h"
 #include "menu_Charging.h"
-// #include "menu_Flash.h"
+#include "menu_Flash.h"
 // #include "menu_Touch.h"
 #include "menu_Http.h"
-// #include "menu_Log.h"
+#include "menu_Log.h"
 // #include "menu_Settings.h"
+#include "menu_Widgets.h"
 #include <lvgl.h>
 
 long last_main_run;
@@ -64,10 +65,10 @@ app_struct offApp = {"Shutdown", &IsymbolShutdown, &offScreen};
 app_struct acclApp = {"Accl", &IsymbolAccl , &acclScreen};
 // app_struct demoApp = {"Demo", &IsymbolChart , &demoScreen};
 
-// app_struct flashApp = {"Flash_test", &IsymbolChart , &flashScreen};
+app_struct flashApp = {"Flash_test", &IsymbolChart , &flashScreen};
 // app_struct touchApp = {"Touch", &IsymbolMouse , &touchScreen};
 app_struct httpApp = {"HTTP", &IsymbolMouse , &httpScreen};
-// app_struct logApp = {"Logging", &IsymbolAnimation , &logScreen};
+app_struct logApp = {"Logging", &IsymbolAnimation , &logScreen};
 
 int maxApps = 4;
 // AppScreen apps1Screen(1, maxApps, &notifyApp, &heartApp, &debugApp, &animationApp);
@@ -76,7 +77,7 @@ int maxApps = 4;
 // AppScreen apps4Screen(4, maxApps, &flashApp, &touchApp, &httpApp, &logApp);
 
 AppScreen apps1Screen(1, vars_max_menu, &updateApp, &acclApp, &batteryApp, &offApp);
-AppScreen apps2Screen(2, vars_max_menu, &httpApp, &heartApp, NULL, NULL);
+AppScreen apps2Screen(2, vars_max_menu, &httpApp, &heartApp, &flashApp, &logApp);
 
 
 // Screen_def *menus[5] = {&homeScreen, &apps1Screen, &apps2Screen, &apps3Screen, &apps4Screen};
@@ -101,6 +102,12 @@ void display_notify() {
 void display_charging() {
   lastScreen = currentScreen;
   currentScreen = &chargingScreen;
+  vars_menu = 0;
+}
+
+void display_widgets() {
+  lastScreen = currentScreen;
+  currentScreen = &widgetsScreen;
   vars_menu = 0;
 }
 
