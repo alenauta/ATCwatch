@@ -21,13 +21,13 @@
 #include "interrupt.h"
 #include "menu.h"
 #include "display.h"
-// #include "accl.h"
-#include "SparkFun_LIS2DH12.h"
+#include "accl.h"
+// #include "SparkFun_LIS2DH12.h"
 #include "push.h"
 #include "flash.h"
 
 bool stepsWhereReseted = false;
-SPARKFUN_LIS2DH12 accel;
+// SPARKFUN_LIS2DH12 accel;
 
 void setup()
 {
@@ -47,21 +47,19 @@ void setup()
   init_backlight();
   init_display();
   display_booting();
-  // set_backlight(1);
+  set_backlight(1);
   init_battery();
   init_hrs3300();
   init_time();
   init_touch();
+  init_accl();
   init_sleep();
   init_menu();
   init_push();
   init_flash();
-  // init_accl();
-  accel.begin();
   init_ble();       // must be before interrupts!!!
   init_interrupt(); // must be after ble!!!
-  delay(100);
-  set_backlight(1);
+  delay(500);
   display_home();
 }
 

@@ -1,0 +1,6 @@
+#pragma once
+#include "Arduino.h"
+#include <lvgl.h>
+
+
+void create_gauge(lv_obj_t *parent, lv_coord_t x, lv_coord_t y, lv_coord_t w);

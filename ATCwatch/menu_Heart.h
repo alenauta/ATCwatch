@@ -49,7 +49,7 @@ public:
     lv_obj_set_pos(label_hr, 20, 90);
 
     // styleSMALL.text.font = &lv_font_roboto_22;
-    lv_style_set_text_font(&styleSMALL, &lv_font_montserrat_22);
+    // lv_style_set_text_font(&styleSMALL, &lv_font_montserrat_22);
 
     label_2 = lv_label_create(lv_scr_act());
     // lv_label_set_style(label_2, LV_LABEL_STYLE_MAIN, &styleSMALL);
