@@ -62,9 +62,8 @@ public:
 
     // BATTERY
     label_battery = lv_label_create(lv_scr_act(), NULL);
-    lv_obj_set_event_cb(label_battery, lv_event_handler);
+    // lv_obj_set_event_cb(label_battery, lv_event_handler);
     lv_obj_align(label_battery, lv_scr_act(), LV_ALIGN_IN_TOP_RIGHT, -10, 5);
-    // lv_label_set_text_fmt(label_battery, "%i%%", get_battery_percent());
 
     lv_style_copy(&style_battery, lv_label_get_style(label_battery, LV_LABEL_STYLE_MAIN));
     // style_battery.text.color = lv_color_hsv_to_rgb(10, 5, 95);
@@ -194,13 +193,13 @@ public:
     sleep_down();
   }
 
-  virtual void lv_event_class(lv_obj_t * object, lv_event_t event)
-    {
-      if (object == label_battery && event == LV_EVENT_SHORT_CLICKED) {
-        lv_label_set_text(label_msg, "CLICK");
-        display_charging();
-      }
-    }
+  // virtual void lv_event_class(lv_obj_t * object, lv_event_t event)
+  //   {
+  //     if (object == label_battery && event == LV_EVENT_SHORT_CLICKED) {
+  //       lv_label_set_text(label_msg, "CLICK");
+  //       display_charging();
+  //     }
+  //   }
 
 private:
   time_data_struct time_data;
