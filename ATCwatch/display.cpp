@@ -136,8 +136,8 @@ void initDisplay() {
   digitalWrite(LCD_RESET, HIGH);
   delay(100);
   startWrite_display();
-  spiCommand(54);
-  temp[0] = 0x40;// rotation for P8b
+  spiCommand(54); // MADCTL
+  temp[0] = 0x48;// rotation and BGR color order - for P8b
   write_fast_spi(temp, 1);
   spiCommand(58);
   temp[0] = 5;
