@@ -22,12 +22,10 @@
 #include "menu.h"
 #include "display.h"
 #include "accl.h"
-// #include "SparkFun_LIS2DH12.h"
 #include "push.h"
 #include "flash.h"
 
 bool stepsWhereReseted = false;
-// SPARKFUN_LIS2DH12 accel;
 
 void setup()
 {
