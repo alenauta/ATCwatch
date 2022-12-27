@@ -24,8 +24,9 @@
 #include "accl.h"
 #include "push.h"
 #include "flash.h"
+#include "alarm.h"
 
-bool stepsWhereReseted = false;
+// bool stepsWhereReseted = false;
 
 void setup()
 {
@@ -57,6 +58,7 @@ void setup()
   init_flash();
   init_ble();       // must be before interrupts!!!
   init_interrupt(); // must be after ble!!!
+  init_alarm();
   delay(500);
   display_home();
 }

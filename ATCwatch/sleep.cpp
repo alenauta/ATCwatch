@@ -19,7 +19,6 @@
 #include <nrf_nvic.h> //interrupt controller stuff
 #include <nrf_sdm.h>
 #include <nrf_soc.h>
-#include <lvgl.h>
 
 bool sleep_enable = false;
 bool sleep_sleeping = false;

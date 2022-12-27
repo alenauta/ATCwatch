@@ -20,4 +20,4 @@ void get_resp(uint8_t *ptr);
 void startWrite_flash(void);
 void endWrite_flash(void);
 void flash_write(uint32_t addr, uint8_t buf[]);
-uint8_t * flash_read(uint32_t addr, uint8_t size);
+void flash_read_page(uint32_t addr, uint8_t * read_buf);

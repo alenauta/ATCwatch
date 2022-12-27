@@ -1,6 +1,11 @@
+/*
+ * Copyright (c) 2020 Aaron Christophel
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
 #pragma once
-// #include "Arduino.h"
+#include "Arduino.h"
 #include "class.h"
 #include "images.h"
 #include "menu.h"
@@ -13,11 +18,12 @@
 #include "heartrate.h"
 #include "alarm.h"
 
+
 class AlarmScreen : public Screen
 {
-public:
-  virtual void pre()
-  {
+  public:
+    virtual void pre()
+    {
       set_swipe_enabled(true);
 
       label_screen = lv_label_create(lv_scr_act(), NULL);
@@ -140,55 +146,52 @@ public:
       lv_roller_set_visible_row_count(roller_hours, 4);
       lv_obj_align(roller_hours, NULL, LV_ALIGN_CENTER, -30, -15);
 
-    time_data_struct time_data = get_time();
-    lv_roller_set_selected(roller_hours, time_data.hr, LV_ANIM_OFF);
-    lv_roller_set_selected(roller_mins, time_data.min, LV_ANIM_OFF);
-  }
-
-  virtual void main()
-  {
-    // getAlarm(2, alarm_data);
-    // lv_label_set_text_fmt(label_screen, "Alarm %i %02i:%02i", alarm_data[0], alarm_data[1], alarm_data[2]);
-  }
-
-  virtual void lv_event_class(lv_obj_t *object, lv_event_t event)
-  {
-    if (object == btn_back && event == LV_EVENT_SHORT_CLICKED)
-    {
-      set_last_menu();
+      time_data_struct time_data = get_time();
+      lv_roller_set_selected(roller_hours, time_data.hr, LV_ANIM_OFF);
+      lv_roller_set_selected(roller_mins, time_data.min, LV_ANIM_OFF);
     }
-    else if (object == btn_save && event == LV_EVENT_SHORT_CLICKED)
+
+    virtual void main()
     {
-      int hours = lv_roller_get_selected(roller_hours);
-      int minutes = lv_roller_get_selected(roller_mins);
-      // uint8_t this_alarm[2] = {hours, minutes};
-      setAlarm(hours, minutes);
-      // set_last_menu();
-      set_motor_ms(25);
+      data = getAlarm(1);
+      lv_label_set_text_fmt(label_screen, "id %d h %d m %d", data[0], data[1], data[2]);
     }
-  }
 
-  virtual void up()
-  {
-  }
+    virtual void lv_event_class(lv_obj_t * object, lv_event_t event)
+    {
+      if (object == btn_back && event == LV_EVENT_SHORT_CLICKED) {
+        set_last_menu();
+      } else if (object == btn_save && event == LV_EVENT_SHORT_CLICKED) {
+        int hours = lv_roller_get_selected(roller_hours);
+        int minutes = lv_roller_get_selected(roller_mins);
+        uint8_t this_alarm[3] = {1, hours, minutes};
+        setAlarm(this_alarm);
+        // set_last_menu();
+        set_motor_ms(35);
+      }
+    }
 
-  virtual void down()
-  {
-  }
+    virtual void up()
+    {
+    }
 
-  virtual void right()
-  {
-  }
+    virtual void down()
+    {
+    }
 
-  virtual void left()
-  {
-  }
+    virtual void right()
+    {
+    }
 
-private:
-  lv_obj_t *label_screen;
-  lv_obj_t *btn_back, *btn_save, *btn_back_label, *btn_save_label, *label_points;
-  lv_obj_t *roller_hours, *roller_mins;
-  uint8_t alarm_data[8];
+    virtual void left()
+    {
+    }
+
+  private:
+    lv_obj_t *label_screen;
+    lv_obj_t *btn_back, *btn_save, *btn_back_label, *btn_save_label, *label_points;
+    lv_obj_t *roller_hours, *roller_mins;
+    uint8_t *data;
 };
 
 AlarmScreen alarmScreen;

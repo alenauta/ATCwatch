@@ -26,7 +26,6 @@ bool flash_sleeping = false;
 uint8_t temp[8];
 uint8_t resp[8];
 uint8_t sr[1];
-uint8_t read_buf[256];
 
 void init_flash()
 {
@@ -201,8 +200,9 @@ void flash_write(uint32_t addr, uint8_t buf[])
   flash_sleep(true);
 }
 
-uint8_t * flash_read(uint32_t addr, uint8_t size)
+void flash_read_page(uint32_t addr, uint8_t * read_buf)
 {
+  // uint8_t read_buf[256];
   if (flash_sleeping)
     flash_sleep(false);
   startWrite_flash();
@@ -211,8 +211,8 @@ uint8_t * flash_read(uint32_t addr, uint8_t size)
   temp[2] = (addr >> 8) & 0xFF;
   temp[3] = addr & 0xFF;
   write_fast_spi(temp, 4);
-  read_fast_spi(read_buf, size);
+  read_fast_spi(read_buf, 256);
   endWrite_flash();
   flash_sleep(true);
-  return read_buf;
+  // return read_buf;
 }

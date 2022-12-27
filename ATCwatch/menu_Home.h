@@ -30,7 +30,6 @@ public:
     start_accl();
 
     time_data = get_time();
-    // accl_data = get_accl_data();
 
     lv_style_copy(&st, &lv_style_plain);
     st.text.color = lv_color_hex(0x1acc10);
